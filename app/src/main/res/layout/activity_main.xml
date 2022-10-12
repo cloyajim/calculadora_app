@@ -7,12 +7,90 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tvOperation"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="@dimen/common_padding_min"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textColor="?colorOnSurface"
+        android:background="?colorSurface"
+        tools:text="5x2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="@dimen/common_padding_min"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textColor="?colorOnSurface"
+        android:background="?colorSurface"
+        tools:text="10.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvOperation"
+        app:layout_constraintBottom_toTopOf="@+id/llTop"/>
+
+    <LinearLayout
+        android:id="@+id/llBottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="H, 4:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llPreBottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="H, 4:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/llBottom">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llMiddle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="H, 4:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/llPreBottom">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llPreTop"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="H, 4:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/llMiddle">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llTop"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="H, 4:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/llPreTop">
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
