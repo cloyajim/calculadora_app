@@ -15,4 +15,6 @@
     <string name="calc_btn_eigth">8</string>
     <string name="calc_btn_nine">9</string>
     <string name="calc_btn_multi">x</string>
+    <string name="calc_btn_clear">CLEAR</string>
+    <string name="calc_btn_div">÷</string>
 </resources>
