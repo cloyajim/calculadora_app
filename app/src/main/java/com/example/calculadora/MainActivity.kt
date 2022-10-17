@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity() {
     private fun getResult(numerOne: Double, operator: String, numberTwo: Double): Double{
         var result = 0.0
 
+        //operacion simple
         when(operator){
             OPERATOR_MULTI -> result = numerOne * numberTwo
             OPERATOR_DIV -> result = numerOne / numberTwo
