@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calculadora.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         val operator = getOperator(operationRef)
         var values = arrayOfNulls<String>(0)
 
+        //division de resta
         if(operator != OPERATOR_NULL){
             if(operator == OPERATOR_SUB){
                 val index = operationRef.lastIndexOf(OPERATOR_SUB)
@@ -61,11 +63,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        if(values.size > 1) {
+            try{ //validacion de signo
+                val numberOne = values[0]!!.toDouble()
+                val numberTwo = values[1]!!.toDouble()
 
-        val numberOne = values[0]!!.toDouble()
-        val numberTwo = values[1]!!.toDouble()
-
-        binding.tvResult.text = getResult(numberOne, operator, numberTwo).toString()
+                binding.tvResult.text = getResult(numberOne, operator, numberTwo).toString()
+            }catch (e:NumberFormatException){
+                showMessage()
+            }
+        }else{ //solo si es diferente de null muestra el mensaje
+            if(operator != OPERATOR_NULL) showMessage()
+        }
     }
 
     private fun getOperator(operation: String): String {
@@ -102,6 +111,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         return result
+    }
+
+    private fun showMessage(){
+        Snackbar.make(binding.root, getString(R.string.message_expresion_incorrect),
+            Snackbar.LENGTH_SHORT).setAnchorView(binding.llTop).show()
     }
 
     companion object{
