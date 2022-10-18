@@ -1,12 +1,10 @@
 package com.example.calculadora
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import com.example.calculadora.databinding.ActivityMainBinding
-import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,7 +45,22 @@ class MainActivity : AppCompatActivity() {
         val operator = getOperator(operationRef)
         var values = arrayOfNulls<String>(0)
 
-        values = operationRef.split(operator).toTypedArray()
+        if(operator != OPERATOR_NULL){
+            if(operator == OPERATOR_SUB){
+                val index = operationRef.lastIndexOf(OPERATOR_SUB)
+                if(index < operationRef.length-1){
+                    values = arrayOfNulls(2)
+                    values[0] = operationRef.substring(0, index)
+                    values[1] = operationRef.substring(index+1)
+                }else{
+                    values = arrayOfNulls(1)
+                    values[0] = operationRef.substring(0, index)
+                }
+            }else {
+                values = operationRef.split(operator).toTypedArray()
+            }
+        }
+
 
         val numberOne = values[0]!!.toDouble()
         val numberTwo = values[1]!!.toDouble()
@@ -56,7 +69,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getOperator(operation: String): String {
-        var operator = ""
+        var operator: String
 
         if (operation.contains(OPERATOR_MULTI)){
             operator = OPERATOR_MULTI
@@ -64,7 +77,12 @@ class MainActivity : AppCompatActivity() {
             operator = OPERATOR_DIV
         }else if(operation.contains(OPERATOR_SUM)){
             operator = OPERATOR_SUM
-        }else if(operation.contains(OPERATOR_SUB)){
+        }else {
+            operator = OPERATOR_NULL
+        }
+
+        // se extrae el operador de resta al inicio
+        if( operator == OPERATOR_NULL && operation.lastIndexOf(OPERATOR_SUB) > 0){
             operator = OPERATOR_SUB
         }
 
