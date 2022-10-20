@@ -43,23 +43,30 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun tryResult(operationRef: String) {
-        val operator = getOperator(operationRef)
+        if(operationRef.isEmpty()) return
+
+        var operation = operationRef
+        if(operation.contains(POINT) && operation.lastIndexOf(POINT) == operation.length - 1){
+            operation = operation.substring(0, operation.length -1)
+        }
+
+        val operator = getOperator(operation)
         var values = arrayOfNulls<String>(0)
 
         //division de resta
         if(operator != OPERATOR_NULL){
             if(operator == OPERATOR_SUB){
-                val index = operationRef.lastIndexOf(OPERATOR_SUB)
-                if(index < operationRef.length-1){
+                val index = operation.lastIndexOf(OPERATOR_SUB)
+                if(index < operation.length-1){
                     values = arrayOfNulls(2)
-                    values[0] = operationRef.substring(0, index)
-                    values[1] = operationRef.substring(index+1)
+                    values[0] = operation.substring(0, index)
+                    values[1] = operation.substring(index+1)
                 }else{
                     values = arrayOfNulls(1)
-                    values[0] = operationRef.substring(0, index)
+                    values[0] = operation.substring(0, index)
                 }
             }else {
-                values = operationRef.split(operator).toTypedArray()
+                values = operation.split(operator).toTypedArray()
             }
         }
 
@@ -124,7 +131,7 @@ class MainActivity : AppCompatActivity() {
         const val OPERATOR_SUM = "+"
         const val OPERATOR_SUB = "-"
         const val OPERATOR_NULL = "null"
-        const val OPERATOR_POINT = "."
+        const val POINT = "."
     }
 
 }
