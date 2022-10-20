@@ -34,7 +34,19 @@ class MainActivity : AppCompatActivity() {
                 binding.tvResult.text = ""
             }
             R.id.btnResult ->{
-                tryResult(binding.tvOperation.text.toString())
+                tryResult(binding.tvOperation.text.toString(), true)
+            }
+            R.id.btnMulti,
+            R.id.btnDiv,
+            R.id.btnSum,
+            R.id.btnSub -> {
+                tryResult(binding.tvOperation.text.toString(), false)
+
+                val operator = valueStr
+                val operation = binding.tvOperation.text.toString()
+                addOperator(operator, operation)
+
+                //binding.tvOperation.append(valueStr)
             }
             else ->{
                 binding.tvOperation.append(valueStr)
@@ -42,7 +54,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun tryResult(operationRef: String) {
+    private fun addOperator(operator: String, operation: String) {
+        val lastElement = if(operation.isEmpty()) ""
+        else operation.substring(operation.length - 1)
+
+        if(operator == OPERATOR_SUB){
+            if(operation.isEmpty() || lastElement != OPERATOR_SUB && lastElement != POINT){
+                binding.tvOperation.append(operator)
+            }
+        }else{
+            if(!operation.isEmpty() && lastElement != POINT){
+                binding.tvOperation.append(operator)
+            }
+        }
+    }
+
+    private fun tryResult(operationRef: String, isFromResult: Boolean) {
         if(operationRef.isEmpty()) return
 
         var operation = operationRef
@@ -76,11 +103,17 @@ class MainActivity : AppCompatActivity() {
                 val numberTwo = values[1]!!.toDouble()
 
                 binding.tvResult.text = getResult(numberOne, operator, numberTwo).toString()
+
+
+
+                if(binding.tvResult.text.isNotEmpty() && !isFromResult){
+                    binding.tvOperation.text = binding.tvResult.text
+                }
             }catch (e:NumberFormatException){
-                showMessage()
+               if(isFromResult) showMessage()
             }
         }else{ //solo si es diferente de null muestra el mensaje
-            if(operator != OPERATOR_NULL) showMessage()
+            if(isFromResult && operator != OPERATOR_NULL) showMessage()
         }
     }
 
