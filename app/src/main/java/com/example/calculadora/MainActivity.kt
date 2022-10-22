@@ -86,6 +86,39 @@ class MainActivity : AppCompatActivity() {
     private fun addPoint(pointStr: String, operation: String) {
         if(!operation.contains(POINT)){
             binding.tvOperation.append(pointStr)
+        } else {
+            val operator = getOperator(operation)
+
+            var values = arrayOfNulls<String>(0)
+            if(operator != OPERATOR_NULL){
+                if(operator == OPERATOR_SUB){
+                    val index = operation.lastIndexOf(OPERATOR_SUB)
+                    if(index < operation.length-1){
+                        values = arrayOfNulls(2)
+                        values[0] = operation.substring(0, index)
+                        values[1] = operation.substring(index+1)
+                    }else{
+                        values = arrayOfNulls(1)
+                        values[0] = operation.substring(0, index)
+                    }
+                }else {
+                    values = operation.split(operator).toTypedArray()
+                }
+            }
+            //dos numeros  que usan punto
+            if(values.size > 0){
+                val numberOne = values[0]!!
+                if(values.size > 1){
+                    val numberTwo = values[1]!!
+                    if(numberOne.contains(POINT) && !numberTwo.contains(POINT)){
+                        binding.tvOperation.append(pointStr)
+                    }
+                } else {
+                    if(numberOne.contains(POINT)){
+                        binding.tvOperation.append(pointStr)
+                    }
+                }
+            }
         }
     }
 
