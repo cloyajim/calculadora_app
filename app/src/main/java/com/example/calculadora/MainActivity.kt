@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import com.example.calculadora.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -16,6 +17,31 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.tvOperation.addTextChangedListener { charSecuence ->
+            if(canReplaceOperator(charSecuence.toString())){
+                val length = binding.tvOperation.text.length
+                val newOperation = binding.tvOperation.text.toString().substring(0, length -2) +
+                        binding.tvOperation.text.toString().substring( length - 1)
+                binding.tvOperation.text = newOperation
+            }
+        }
+
+    }
+
+    //ultimo caracter
+    private fun canReplaceOperator(charSecuence: CharSequence): Boolean {
+        if(charSecuence.length < 2) return false
+
+        val lastElement = charSecuence[charSecuence.length - 1].toString()
+        val penultimateElement = charSecuence[charSecuence.length - 2].toString()
+
+        return (lastElement == OPERATOR_MULTI ||
+                lastElement == OPERATOR_DIV ||
+                lastElement == OPERATOR_SUM) &&
+                (penultimateElement == OPERATOR_MULTI ||
+                        penultimateElement == OPERATOR_DIV ||
+                        penultimateElement == OPERATOR_SUM ||
+                        penultimateElement == OPERATOR_SUB)
     }
 
     fun onClickButton(view: View){
@@ -46,11 +72,20 @@ class MainActivity : AppCompatActivity() {
                 val operation = binding.tvOperation.text.toString()
                 addOperator(operator, operation)
 
-                //binding.tvOperation.append(valueStr)
+            }
+            R.id.btnPoint ->{
+                val operation = binding.tvOperation.text.toString()
+                addPoint(valueStr, operation)
             }
             else ->{
                 binding.tvOperation.append(valueStr)
             }
+        }
+    }
+
+    private fun addPoint(pointStr: String, operation: String) {
+        if(!operation.contains(POINT)){
+            binding.tvOperation.append(pointStr)
         }
     }
 
