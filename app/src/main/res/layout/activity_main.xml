@@ -76,9 +76,9 @@
             android:layout_weight="50"
             android:text="@string/calc_btn_result"
             android:textSize="@dimen/calc_btn_text_size"
-            android:layout_marginStart="@dimen/common_padding_min"
             android:backgroundTint="@color/blue_800"
-            android:onClick="onClickButton"/>
+            android:onClick="onClickButton"
+            android:layout_marginStart="@dimen/common_padding_default"/>
 
 
     </LinearLayout>
@@ -275,7 +275,8 @@
             android:textSize="@dimen/calc_btn_text_size"
             android:layout_marginStart="@dimen/common_padding_min"
             android:backgroundTint="@color/green_800"
-            android:onClick="onClickButton"/>
+            android:onClick="onClickButton"
+            android:layout_marginEnd="@dimen/common_padding_min"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnDelete"
@@ -286,7 +287,7 @@
             app:icon="@drawable/ic_backspace"
             app:iconGravity="textStart"
             app:iconPadding="@dimen/common_padding_none"
-            android:backgroundTint="@color/blue_800"
+            android:backgroundTint="@color/red_800"
             android:onClick="onClickButton"/>
 
         <Button
