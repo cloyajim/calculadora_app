@@ -18,6 +18,8 @@
         <item name="colorOnBackground">@color/white</item>
         <item name="colorOnSurface">@color/white</item>
 
+        <!--Shape-->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Mytheme.SmallComponent</item>
 
 
     </style>
