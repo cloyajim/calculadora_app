@@ -268,8 +268,5 @@
             android:backgroundTint="@color/blue_800"
             android:onClick="onClickButton"/>
 
-
-
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
