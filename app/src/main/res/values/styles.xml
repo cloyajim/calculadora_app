@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="MyLinearLayout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingEnd">@dimen/common_padding_min</item>
+        <!--constrains-->
+        <item name="layout_constraintDimensionRatio">H, 4:1</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+    </style>
+
     <style name="MyTextView">
         <item name="android:layout_width">0dp</item>
         <item name="android:padding">@dimen/common_padding_min</item>
         <item name="android:textColor">?colorOnSurface</item>
         <item name="android:background">?colorSurface</item>
+        <!--constrains-->
         <item name="layout_constraintStart_toStartOf">parent</item>
         <item name="layout_constraintEnd_toEndOf">parent</item>
-
     </style>
 
 </resources>
