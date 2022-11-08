@@ -36,36 +36,18 @@
 
         <Button
             android:id="@+id/btnZero"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
             android:text="@string/calc_btn_zero"
-            android:textSize="@dimen/calc_btn_text_size"
-            android:layout_marginStart="@dimen/common_padding_min"
-            android:backgroundTint="@color/blue_900"
-            android:onClick="onClickButton" />
+            style="@style/ButtonNumeric"/>
 
         <Button
             android:id="@+id/btnPoint"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
             android:text="@string/calc_btn_point"
-            android:textSize="@dimen/calc_btn_text_size"
-            android:layout_marginStart="@dimen/common_padding_min"
-            android:backgroundTint="@color/blue_800"
-            android:onClick="onClickButton"/>
+            style="@style/ButtonOperator"/>
 
         <Button
             android:id="@+id/btnResult"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="50"
             android:text="@string/calc_btn_result"
-            android:textSize="@dimen/calc_btn_text_size"
-            android:backgroundTint="@color/blue_800"
-            android:onClick="onClickButton"
-            android:layout_marginStart="@dimen/common_padding_default"/>
+            style="@style/ButtonSecondaryEqual" />
 
 
     </LinearLayout>
@@ -78,47 +60,23 @@
 
         <Button
             android:id="@+id/btnOne"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
             android:text="@string/calc_btn_one"
-            android:textSize="@dimen/calc_btn_text_size"
-            android:layout_marginStart="@dimen/common_padding_min"
-            android:backgroundTint="@color/blue_900"
-            android:onClick="onClickButton"/>
+            style="@style/ButtonNumeric"/>
 
         <Button
             android:id="@+id/btnTwo"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
             android:text="@string/calc_btn_two"
-            android:textSize="@dimen/calc_btn_text_size"
-            android:layout_marginStart="@dimen/common_padding_min"
-            android:backgroundTint="@color/blue_900"
-            android:onClick="onClickButton"/>
+            style="@style/ButtonNumeric"/>
 
         <Button
             android:id="@+id/btnThree"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
             android:text="@string/calc_btn_three"
-            android:textSize="@dimen/calc_btn_text_size"
-            android:layout_marginStart="@dimen/common_padding_min"
-            android:backgroundTint="@color/blue_900"
-            android:onClick="onClickButton"/>
+            style="@style/ButtonNumeric"/>
 
         <Button
             android:id="@+id/btnSum"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
             android:text="@string/calc_btn_sum"
-            android:textSize="@dimen/calc_btn_text_size"
-            android:layout_marginStart="@dimen/common_padding_min"
-            android:backgroundTint="@color/blue_800"
-            android:onClick="onClickButton"/>
+            style="@style/ButtonOperator"/>
 
     </LinearLayout>
 
@@ -130,47 +88,23 @@
 
         <Button
             android:id="@+id/btnFour"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
             android:text="@string/calc_btn_four"
-            android:textSize="@dimen/calc_btn_text_size"
-            android:layout_marginStart="@dimen/common_padding_min"
-            android:backgroundTint="@color/blue_900"
-            android:onClick="onClickButton"/>
+            style="@style/ButtonNumeric"/>
 
         <Button
             android:id="@+id/btnFive"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
             android:text="@string/calc_btn_five"
-            android:textSize="@dimen/calc_btn_text_size"
-            android:layout_marginStart="@dimen/common_padding_min"
-            android:backgroundTint="@color/blue_900"
-            android:onClick="onClickButton"/>
+            style="@style/ButtonNumeric"/>
 
         <Button
             android:id="@+id/btnSix"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
             android:text="@string/calc_btn_six"
-            android:textSize="@dimen/calc_btn_text_size"
-            android:layout_marginStart="@dimen/common_padding_min"
-            android:backgroundTint="@color/blue_900"
-            android:onClick="onClickButton"/>
+            style="@style/ButtonNumeric"/>
 
         <Button
             android:id="@+id/btnSub"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
             android:text="@string/calc_btn_sub"
-            android:textSize="@dimen/calc_btn_text_size"
-            android:layout_marginStart="@dimen/common_padding_min"
-            android:backgroundTint="@color/blue_800"
-            android:onClick="onClickButton"/>
+            style="@style/ButtonOperator"/>
 
     </LinearLayout>
 
@@ -182,48 +116,24 @@
 
         <Button
             android:id="@+id/btnSeven"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
             android:text="@string/calc_btn_seven"
-            android:textSize="@dimen/calc_btn_text_size"
-            android:layout_marginStart="@dimen/common_padding_min"
-            android:backgroundTint="@color/blue_900"
-            android:onClick="onClickButton"/>
+            style="@style/ButtonNumeric"/>
 
         <Button
             android:id="@+id/btnEigth"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
             android:text="@string/calc_btn_eigth"
-            android:textSize="@dimen/calc_btn_text_size"
-            android:layout_marginStart="@dimen/common_padding_min"
-            android:backgroundTint="@color/blue_900"
-            android:onClick="onClickButton"/>
+            style="@style/ButtonNumeric"/>
 
         <Button
             android:id="@+id/btnNine"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
             android:text="@string/calc_btn_nine"
-            android:textSize="@dimen/calc_btn_text_size"
-            android:layout_marginStart="@dimen/common_padding_min"
-            android:backgroundTint="@color/blue_900"
-            android:onClick="onClickButton"/>
+            style="@style/ButtonNumeric"/>
 
         <Button
             android:id="@+id/btnMulti"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
             android:textAllCaps="false"
             android:text="@string/calc_btn_multi"
-            android:textSize="@dimen/calc_btn_text_size"
-            android:layout_marginStart="@dimen/common_padding_min"
-            android:backgroundTint="@color/blue_800"
-            android:onClick="onClickButton"/>
+            style="@style/ButtonOperator"/>
 
     </LinearLayout>
 
@@ -235,38 +145,22 @@
 
         <Button
             android:id="@+id/btnClear"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="50"
             android:text="@string/calc_btn_clear"
-            android:textSize="@dimen/calc_btn_text_size"
-            android:layout_marginStart="@dimen/common_padding_min"
-            android:backgroundTint="@color/green_800"
-            android:onClick="onClickButton"
+            style="@style/ButtonSecondaryClear"
             android:layout_marginEnd="@dimen/common_padding_min"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnDelete"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
-            android:layout_marginStart="@dimen/common_padding_min"
             app:icon="@drawable/ic_backspace"
             app:iconGravity="textStart"
             app:iconPadding="@dimen/common_padding_none"
             android:backgroundTint="@color/red_800"
-            android:onClick="onClickButton"/>
+            style="@style/ButtonOperator"/>
 
         <Button
             android:id="@+id/btnDiv"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
             android:text="@string/calc_btn_div"
-            android:textSize="@dimen/calc_btn_text_size"
-            android:layout_marginStart="@dimen/common_padding_min"
-            android:backgroundTint="@color/blue_800"
-            android:onClick="onClickButton"/>
+            style="@style/ButtonOperator"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

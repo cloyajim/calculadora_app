@@ -35,13 +35,13 @@ class MainActivity : AppCompatActivity() {
         val lastElement = charSecuence[charSecuence.length - 1].toString()
         val penultimateElement = charSecuence[charSecuence.length - 2].toString()
 
-        return (lastElement == OPERATOR_MULTI ||
-                lastElement == OPERATOR_DIV ||
-                lastElement == OPERATOR_SUM) &&
-                (penultimateElement == OPERATOR_MULTI ||
-                        penultimateElement == OPERATOR_DIV ||
-                        penultimateElement == OPERATOR_SUM ||
-                        penultimateElement == OPERATOR_SUB)
+        return (lastElement == Constants.OPERATOR_MULTI ||
+                lastElement == Constants.OPERATOR_DIV ||
+                lastElement == Constants.OPERATOR_SUM) &&
+                (penultimateElement == Constants.OPERATOR_MULTI ||
+                        penultimateElement == Constants.OPERATOR_DIV ||
+                        penultimateElement == Constants.OPERATOR_SUM ||
+                        penultimateElement == Constants.OPERATOR_SUB)
     }
 
     fun onClickButton(view: View){
@@ -84,15 +84,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addPoint(pointStr: String, operation: String) {
-        if(!operation.contains(POINT)){
+        if(!operation.contains(Constants.POINT)){
             binding.tvOperation.append(pointStr)
         } else {
             val operator = getOperator(operation)
 
             var values = arrayOfNulls<String>(0)
-            if(operator != OPERATOR_NULL){
-                if(operator == OPERATOR_SUB){
-                    val index = operation.lastIndexOf(OPERATOR_SUB)
+            if(operator != Constants.OPERATOR_NULL){
+                if(operator == Constants.OPERATOR_SUB){
+                    val index = operation.lastIndexOf(Constants.OPERATOR_SUB)
                     if(index < operation.length-1){
                         values = arrayOfNulls(2)
                         values[0] = operation.substring(0, index)
@@ -110,11 +110,11 @@ class MainActivity : AppCompatActivity() {
                 val numberOne = values[0]!!
                 if(values.size > 1){
                     val numberTwo = values[1]!!
-                    if(numberOne.contains(POINT) && !numberTwo.contains(POINT)){
+                    if(numberOne.contains(Constants.POINT) && !numberTwo.contains(Constants.POINT)){
                         binding.tvOperation.append(pointStr)
                     }
                 } else {
-                    if(numberOne.contains(POINT)){
+                    if(numberOne.contains(Constants.POINT)){
                         binding.tvOperation.append(pointStr)
                     }
                 }
@@ -126,12 +126,12 @@ class MainActivity : AppCompatActivity() {
         val lastElement = if(operation.isEmpty()) ""
         else operation.substring(operation.length - 1)
 
-        if(operator == OPERATOR_SUB){
-            if(operation.isEmpty() || lastElement != OPERATOR_SUB && lastElement != POINT){
+        if(operator == Constants.OPERATOR_SUB){
+            if(operation.isEmpty() || lastElement != Constants.OPERATOR_SUB && lastElement != Constants.POINT){
                 binding.tvOperation.append(operator)
             }
         }else{
-            if(!operation.isEmpty() && lastElement != POINT){
+            if(!operation.isEmpty() && lastElement != Constants.POINT){
                 binding.tvOperation.append(operator)
             }
         }
@@ -141,7 +141,7 @@ class MainActivity : AppCompatActivity() {
         if(operationRef.isEmpty()) return
 
         var operation = operationRef
-        if(operation.contains(POINT) && operation.lastIndexOf(POINT) == operation.length - 1){
+        if(operation.contains(Constants.POINT) && operation.lastIndexOf(Constants.POINT) == operation.length - 1){
             operation = operation.substring(0, operation.length -1)
         }
 
@@ -149,9 +149,9 @@ class MainActivity : AppCompatActivity() {
         var values = arrayOfNulls<String>(0)
 
         //division de resta
-        if(operator != OPERATOR_NULL){
-            if(operator == OPERATOR_SUB){
-                val index = operation.lastIndexOf(OPERATOR_SUB)
+        if(operator != Constants.OPERATOR_NULL){
+            if(operator == Constants.OPERATOR_SUB){
+                val index = operation.lastIndexOf(Constants.OPERATOR_SUB)
                 if(index < operation.length-1){
                     values = arrayOfNulls(2)
                     values[0] = operation.substring(0, index)
@@ -181,26 +181,26 @@ class MainActivity : AppCompatActivity() {
                if(isFromResult) showMessage()
             }
         }else{ //solo si es diferente de null muestra el mensaje
-            if(isFromResult && operator != OPERATOR_NULL) showMessage()
+            if(isFromResult && operator != Constants.OPERATOR_NULL) showMessage()
         }
     }
 
     private fun getOperator(operation: String): String {
         var operator: String
 
-        if (operation.contains(OPERATOR_MULTI)){
-            operator = OPERATOR_MULTI
-        } else if(operation.contains(OPERATOR_DIV)){
-            operator = OPERATOR_DIV
-        }else if(operation.contains(OPERATOR_SUM)){
-            operator = OPERATOR_SUM
+        if (operation.contains(Constants.OPERATOR_MULTI)){
+            operator = Constants.OPERATOR_MULTI
+        } else if(operation.contains(Constants.OPERATOR_DIV)){
+            operator = Constants.OPERATOR_DIV
+        }else if(operation.contains(Constants.OPERATOR_SUM)){
+            operator = Constants.OPERATOR_SUM
         }else {
-            operator = OPERATOR_NULL
+            operator = Constants.OPERATOR_NULL
         }
 
         // se extrae el operador de resta al inicio
-        if( operator == OPERATOR_NULL && operation.lastIndexOf(OPERATOR_SUB) > 0){
-            operator = OPERATOR_SUB
+        if( operator == Constants.OPERATOR_NULL && operation.lastIndexOf(Constants.OPERATOR_SUB) > 0){
+            operator = Constants.OPERATOR_SUB
         }
 
         return operator
@@ -212,10 +212,10 @@ class MainActivity : AppCompatActivity() {
 
         //operacion simple
         when(operator){
-            OPERATOR_MULTI -> result = numerOne * numberTwo
-            OPERATOR_DIV -> result = numerOne / numberTwo
-            OPERATOR_SUM -> result = numerOne + numberTwo
-            OPERATOR_SUB -> result = numerOne - numberTwo
+            Constants.OPERATOR_MULTI -> result = numerOne * numberTwo
+            Constants.OPERATOR_DIV -> result = numerOne / numberTwo
+            Constants.OPERATOR_SUM -> result = numerOne + numberTwo
+            Constants.OPERATOR_SUB -> result = numerOne - numberTwo
         }
 
         return result
@@ -226,13 +226,5 @@ class MainActivity : AppCompatActivity() {
             Snackbar.LENGTH_SHORT).setAnchorView(binding.llTop).show()
     }
 
-    companion object{
-        const val OPERATOR_MULTI = "x"
-        const val OPERATOR_DIV = "÷"
-        const val OPERATOR_SUM = "+"
-        const val OPERATOR_SUB = "-"
-        const val OPERATOR_NULL = "null"
-        const val POINT = "."
-    }
 
 }
