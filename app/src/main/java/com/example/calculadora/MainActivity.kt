@@ -17,15 +17,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.tvOperation.addTextChangedListener { charSecuence ->
-            if(canReplaceOperator(charSecuence.toString())){
-                val length = binding.tvOperation.text.length
-                val newOperation = binding.tvOperation.text.toString().substring(0, length -2) +
-                        binding.tvOperation.text.toString().substring( length - 1)
-                binding.tvOperation.text = newOperation
+        //remplazo de operador
+        binding.tvOperation.run{
+            addTextChangedListener { charSecuence ->
+                if (canReplaceOperator(charSecuence.toString())) {
+                    val newStr = "${text.substring(0, text.length - 2)}${text.substring(text.length - 1)}"
+                    text = newStr
+                }
             }
         }
-
     }
 
     //ultimo caracter
