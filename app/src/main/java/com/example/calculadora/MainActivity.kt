@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         //remplazo de operador
         binding.tvOperation.run{
             addTextChangedListener { charSecuence ->
-                if (canReplaceOperator(charSecuence.toString())) {
+                if (Operation.canReplaceOperator(charSecuence.toString())) {
                     val newStr = "${text.substring(0, text.length - 2)}${text.substring(text.length - 1)}"
                     text = newStr
                 }
@@ -28,58 +28,38 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //ultimo caracter
-    private fun canReplaceOperator(charSecuence: CharSequence): Boolean {
-        if(charSecuence.length < 2) return false
 
-        val lastElement = charSecuence[charSecuence.length - 1].toString()
-        val penultimateElement = charSecuence[charSecuence.length - 2].toString()
-
-        return (lastElement == Constants.OPERATOR_MULTI ||
-                lastElement == Constants.OPERATOR_DIV ||
-                lastElement == Constants.OPERATOR_SUM) &&
-                (penultimateElement == Constants.OPERATOR_MULTI ||
-                        penultimateElement == Constants.OPERATOR_DIV ||
-                        penultimateElement == Constants.OPERATOR_SUM ||
-                        penultimateElement == Constants.OPERATOR_SUB)
-    }
 
     fun onClickButton(view: View){
         val valueStr = (view as Button).text.toString()
+        val operation = binding.tvOperation.text.toString()
 
         when(view.id){
             R.id.btnDelete ->{
-                val length = binding.tvOperation.text.length
-                if(length > 0 ){ //para que no cierre al no tener caracter
-                    val newOperation = binding.tvOperation.text.toString().substring(0, length-1)
-                    binding.tvOperation.text = newOperation
+                binding.tvOperation.run{
+                    if(text.length > 0) text = operation.substring(0, text.length-1)
                 }
             }
             R.id.btnClear ->{
                 binding.tvOperation.text = ""
                 binding.tvResult.text = ""
             }
-            R.id.btnResult ->{
-                tryResult(binding.tvOperation.text.toString(), true)
-            }
+            R.id.btnResult -> tryResult(operation, true)
+
             R.id.btnMulti,
             R.id.btnDiv,
             R.id.btnSum,
             R.id.btnSub -> {
-                tryResult(binding.tvOperation.text.toString(), false)
+                tryResult(operation, false)
 
                 val operator = valueStr
-                val operation = binding.tvOperation.text.toString()
                 addOperator(operator, operation)
 
             }
-            R.id.btnPoint ->{
-                val operation = binding.tvOperation.text.toString()
-                addPoint(valueStr, operation)
-            }
-            else ->{
-                binding.tvOperation.append(valueStr)
-            }
+            R.id.btnPoint -> addPoint(valueStr, operation)
+
+            else -> binding.tvOperation.append(valueStr)
+
         }
     }
 
@@ -87,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         if(!operation.contains(Constants.POINT)){
             binding.tvOperation.append(pointStr)
         } else {
-            val operator = getOperator(operation)
+            val operator = Operation.getOperator(operation)
 
             var values = arrayOfNulls<String>(0)
             if(operator != Constants.OPERATOR_NULL){
@@ -145,7 +125,7 @@ class MainActivity : AppCompatActivity() {
             operation = operation.substring(0, operation.length -1)
         }
 
-        val operator = getOperator(operation)
+        val operator = Operation.getOperator(operation)
         var values = arrayOfNulls<String>(0)
 
         //division de resta
@@ -185,26 +165,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getOperator(operation: String): String {
-        var operator: String
 
-        if (operation.contains(Constants.OPERATOR_MULTI)){
-            operator = Constants.OPERATOR_MULTI
-        } else if(operation.contains(Constants.OPERATOR_DIV)){
-            operator = Constants.OPERATOR_DIV
-        }else if(operation.contains(Constants.OPERATOR_SUM)){
-            operator = Constants.OPERATOR_SUM
-        }else {
-            operator = Constants.OPERATOR_NULL
-        }
-
-        // se extrae el operador de resta al inicio
-        if( operator == Constants.OPERATOR_NULL && operation.lastIndexOf(Constants.OPERATOR_SUB) > 0){
-            operator = Constants.OPERATOR_SUB
-        }
-
-        return operator
-    }
 
     //obtener el resultado
     private fun getResult(numerOne: Double, operator: String, numberTwo: Double): Double{
