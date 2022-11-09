@@ -28,8 +28,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
     fun onClickButton(view: View){
         val valueStr = (view as Button).text.toString()
         val operation = binding.tvOperation.text.toString()
@@ -44,16 +42,15 @@ class MainActivity : AppCompatActivity() {
                 binding.tvOperation.text = ""
                 binding.tvResult.text = ""
             }
-            R.id.btnResult -> tryResult(operation, true)
+            R.id.btnResult -> checkOnResult(operation, true)
 
             R.id.btnMulti,
             R.id.btnDiv,
             R.id.btnSum,
             R.id.btnSub -> {
-                tryResult(operation, false)
+                checkOnResult(operation, false)
 
-                val operator = valueStr
-                addOperator(operator, operation)
+                addOperator(valueStr, operation)
 
             }
             R.id.btnPoint -> addPoint(valueStr, operation)
@@ -117,69 +114,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun tryResult(operationRef: String, isFromResult: Boolean) {
-        if(operationRef.isEmpty()) return
-
-        var operation = operationRef
-        if(operation.contains(Constants.POINT) && operation.lastIndexOf(Constants.POINT) == operation.length - 1){
-            operation = operation.substring(0, operation.length -1)
-        }
-
-        val operator = Operation.getOperator(operation)
-        var values = arrayOfNulls<String>(0)
-
-        //division de resta
-        if(operator != Constants.OPERATOR_NULL){
-            if(operator == Constants.OPERATOR_SUB){
-                val index = operation.lastIndexOf(Constants.OPERATOR_SUB)
-                if(index < operation.length-1){
-                    values = arrayOfNulls(2)
-                    values[0] = operation.substring(0, index)
-                    values[1] = operation.substring(index+1)
-                }else{
-                    values = arrayOfNulls(1)
-                    values[0] = operation.substring(0, index)
-                }
-            }else {
-                values = operation.split(operator).toTypedArray()
-            }
-        }
-
-        if(values.size > 1) {
-            try{ //validacion de signo
-                val numberOne = values[0]!!.toDouble()
-                val numberTwo = values[1]!!.toDouble()
-
-                binding.tvResult.text = getResult(numberOne, operator, numberTwo).toString()
-
-
+    private fun checkOnResult(operation: String, isFromResult: Boolean){
+        Operation.tryResult(operation, isFromResult, object : OnResolveListener{
+            override fun onShowResult(result: Double) {
+                binding.tvResult.text = result.toString()
 
                 if(binding.tvResult.text.isNotEmpty() && !isFromResult){
                     binding.tvOperation.text = binding.tvResult.text
                 }
-            }catch (e:NumberFormatException){
-               if(isFromResult) showMessage()
             }
-        }else{ //solo si es diferente de null muestra el mensaje
-            if(isFromResult && operator != Constants.OPERATOR_NULL) showMessage()
-        }
-    }
 
+            override fun onShowMessage(errorRes: Int) {
+                showMessage()
+            }
+        })
 
-
-    //obtener el resultado
-    private fun getResult(numerOne: Double, operator: String, numberTwo: Double): Double{
-        var result = 0.0
-
-        //operacion simple
-        when(operator){
-            Constants.OPERATOR_MULTI -> result = numerOne * numberTwo
-            Constants.OPERATOR_DIV -> result = numerOne / numberTwo
-            Constants.OPERATOR_SUM -> result = numerOne + numberTwo
-            Constants.OPERATOR_SUB -> result = numerOne - numberTwo
-        }
-
-        return result
     }
 
     private fun showMessage(){
