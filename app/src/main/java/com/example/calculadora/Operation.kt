@@ -4,16 +4,14 @@ class Operation {
 
     companion object{
         fun getOperator(operation: String): String {
-            var operator: String
-
-            if (operation.contains(Constants.OPERATOR_MULTI)){
-                operator = Constants.OPERATOR_MULTI
+            var operator = if (operation.contains(Constants.OPERATOR_MULTI)){
+                Constants.OPERATOR_MULTI
             } else if(operation.contains(Constants.OPERATOR_DIV)){
-                operator = Constants.OPERATOR_DIV
+                Constants.OPERATOR_DIV
             }else if(operation.contains(Constants.OPERATOR_SUM)){
-                operator = Constants.OPERATOR_SUM
+                Constants.OPERATOR_SUM
             }else {
-                operator = Constants.OPERATOR_NULL
+                Constants.OPERATOR_NULL
             }
 
             // se extrae el operador de resta al inicio
@@ -51,9 +49,6 @@ class Operation {
             val operator = Operation.getOperator(operation)
             val values = divideOperation(operator, operation)
 
-
-
-
             if(values.size > 1) {
                 try{ //validacion de signo
                     val numberOne = values[0]!!.toDouble()
@@ -83,7 +78,7 @@ class Operation {
                         values[0] = operation.substring(0, index)
                     }
                 }else {
-                    values = operation.split(operator).toTypedArray()
+                    values = operation.split(operator).dropLastWhile { it == "" }.toTypedArray()
                 }
             }
             return values
@@ -91,17 +86,14 @@ class Operation {
 
         //obtener el resultado
         fun getResult(numerOne: Double, operator: String, numberTwo: Double): Double{
-            var result = 0.0
 
             //operacion simple
-            when(operator){
-                Constants.OPERATOR_MULTI -> result = numerOne * numberTwo
-                Constants.OPERATOR_DIV -> result = numerOne / numberTwo
-                Constants.OPERATOR_SUM -> result = numerOne + numberTwo
-                Constants.OPERATOR_SUB -> result = numerOne - numberTwo
+           return when(operator){
+                Constants.OPERATOR_MULTI -> numerOne * numberTwo
+                Constants.OPERATOR_DIV -> numerOne / numberTwo
+                Constants.OPERATOR_SUM -> numerOne + numberTwo
+                else -> numerOne - numberTwo //Constants.OPERATOR_SUB
             }
-
-            return result
         }
     }
 }

@@ -57,7 +57,6 @@ class MainActivity : AppCompatActivity() {
             R.id.btnPoint -> addPoint(valueStr, operation)
 
             else -> binding.tvOperation.append(valueStr)
-
         }
     }
 
@@ -120,6 +119,5 @@ class MainActivity : AppCompatActivity() {
         Snackbar.make(binding.root, errorRes,
             Snackbar.LENGTH_SHORT).setAnchorView(binding.llTop).show()
     }
-
 
 }
