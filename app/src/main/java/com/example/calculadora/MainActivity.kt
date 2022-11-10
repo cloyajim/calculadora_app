@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.calculadora.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -117,7 +118,7 @@ class MainActivity : AppCompatActivity() {
     private fun checkOnResult(operation: String, isFromResult: Boolean){
         Operation.tryResult(operation, isFromResult, object : OnResolveListener{
             override fun onShowResult(result: Double) {
-                binding.tvResult.text = result.toString()
+                binding.tvResult.text = String.format(Locale.ROOT, "%.2f", result) //decimales
 
                 if(binding.tvResult.text.isNotEmpty() && !isFromResult){
                     binding.tvOperation.text = binding.tvResult.text
@@ -125,14 +126,14 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onShowMessage(errorRes: Int) {
-                showMessage()
+                showMessage(errorRes)
             }
         })
 
     }
 
-    private fun showMessage(){
-        Snackbar.make(binding.root, getString(R.string.message_expresion_incorrect),
+    private fun showMessage(errorRes: Int){
+        Snackbar.make(binding.root, errorRes,
             Snackbar.LENGTH_SHORT).setAnchorView(binding.llTop).show()
     }
 

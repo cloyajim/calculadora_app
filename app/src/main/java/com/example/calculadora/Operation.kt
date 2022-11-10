@@ -79,7 +79,7 @@ class Operation {
                 }
             }else{ //solo si es diferente de null muestra el mensaje
                 if(isFromResult && operator != Constants.OPERATOR_NULL)
-                    listener.onShowMessage(R.string.message_num_incorrect)
+                    listener.onShowMessage(R.string.message_expresion_incorrect)
             }
         }
 
