@@ -66,23 +66,9 @@ class MainActivity : AppCompatActivity() {
             binding.tvOperation.append(pointStr)
         } else {
             val operator = Operation.getOperator(operation)
+            //division
+            val values = Operation.divideOperation(operator, operation)
 
-            var values = arrayOfNulls<String>(0)
-            if(operator != Constants.OPERATOR_NULL){
-                if(operator == Constants.OPERATOR_SUB){
-                    val index = operation.lastIndexOf(Constants.OPERATOR_SUB)
-                    if(index < operation.length-1){
-                        values = arrayOfNulls(2)
-                        values[0] = operation.substring(0, index)
-                        values[1] = operation.substring(index+1)
-                    }else{
-                        values = arrayOfNulls(1)
-                        values[0] = operation.substring(0, index)
-                    }
-                }else {
-                    values = operation.split(operator).toTypedArray()
-                }
-            }
             //dos numeros  que usan punto
             if(values.size > 0){
                 val numberOne = values[0]!!
@@ -129,9 +115,7 @@ class MainActivity : AppCompatActivity() {
                 showMessage(errorRes)
             }
         })
-
     }
-
     private fun showMessage(errorRes: Int){
         Snackbar.make(binding.root, errorRes,
             Snackbar.LENGTH_SHORT).setAnchorView(binding.llTop).show()

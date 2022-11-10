@@ -49,9 +49,28 @@ class Operation {
             }
 
             val operator = Operation.getOperator(operation)
-            var values = arrayOfNulls<String>(0)
+            val values = divideOperation(operator, operation)
 
-            //division de resta
+
+
+
+            if(values.size > 1) {
+                try{ //validacion de signo
+                    val numberOne = values[0]!!.toDouble()
+                    val numberTwo = values[1]!!.toDouble()
+
+                    listener.onShowResult(getResult(numberOne, operator, numberTwo))
+                }catch (e:NumberFormatException){
+                    if(isFromResult) listener.onShowMessage(R.string.message_num_incorrect)
+                }
+            }else{ //solo si es diferente de null muestra el mensaje
+                if(isFromResult && operator != Constants.OPERATOR_NULL)
+                    listener.onShowMessage(R.string.message_expresion_incorrect)
+            }
+        }
+
+        fun divideOperation(operator: String, operation: String): Array<String?> {
+            var values = arrayOfNulls<String>(0)
             if(operator != Constants.OPERATOR_NULL){
                 if(operator == Constants.OPERATOR_SUB){
                     val index = operation.lastIndexOf(Constants.OPERATOR_SUB)
@@ -67,20 +86,7 @@ class Operation {
                     values = operation.split(operator).toTypedArray()
                 }
             }
-
-            if(values.size > 1) {
-                try{ //validacion de signo
-                    val numberOne = values[0]!!.toDouble()
-                    val numberTwo = values[1]!!.toDouble()
-
-                    listener.onShowResult(getResult(numberOne, operator, numberTwo))
-                }catch (e:NumberFormatException){
-                    if(isFromResult) listener.onShowMessage(R.string.message_num_incorrect)
-                }
-            }else{ //solo si es diferente de null muestra el mensaje
-                if(isFromResult && operator != Constants.OPERATOR_NULL)
-                    listener.onShowMessage(R.string.message_expresion_incorrect)
-            }
+            return values
         }
 
         //obtener el resultado
